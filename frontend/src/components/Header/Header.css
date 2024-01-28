@@ -1,0 +1,47 @@
+/* Header.css */
+
+.header {
+  background: #333;
+  color: white;
+  padding: 10px 20px;
+  display: flex;
+  align-items: center;
+}
+
+.header-container {
+  display: flex;
+  align-items: center;
+  flex-grow: 1; /* Ensures that the logo and title take up the available space */
+}
+
+.header-logo {
+  width: 75px; /* Adjust logo width as needed */
+  height: auto; /* Maintain aspect ratio */
+  margin-right: 15px; /* Adds space between logo and title */
+}
+
+.header-title {
+  font-size: 24px; /* Adjust size as needed */
+  margin: 0;
+}
+
+.logout-container {
+  /* This container will now only affect the logout button */
+}
+
+.logout-button {
+  background-color: #555;
+  color: white;
+  border: none;
+  cursor: pointer;
+  padding: 5px 10px;
+  font-size: 16px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+}
+
+.logout-button:hover {
+  background-color: #666;
+  transition: background-color 0.3s;
+}

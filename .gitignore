@@ -1,0 +1,73 @@
+# Created by https://www.toptal.com/developers/gitignore/api/java,maven,intellij,react
+# Edit at https://www.toptal.com/developers/gitignore?templates=java,maven,intellij,react
+
+### Backend (Java/Maven/IntelliJ) ###
+
+# User-specific IntelliJ IDEA files
+/backend/.idea/**/workspace.xml
+/backend/.idea/**/tasks.xml
+/backend/.idea/**/usage.statistics.xml
+/backend/.idea/**/dictionaries
+/backend/.idea/**/shelf
+#... [Include all other IntelliJ IDEA specific rules here]
+
+# Compiled class files
+*.class
+
+# Package Files
+*.jar
+*.war
+*.nar
+*.ear
+*.zip
+*.tar.gz
+*.rar
+
+# Maven specific
+/backend/target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+#... [Include all other Maven specific rules here]
+
+# Java specific
+hs_err_pid*
+
+### Frontend (React) ###
+
+# General
+.DS_Store
+*.log
+logs
+**/*.backup.*
+**/*.back.*
+
+# Node modules and Bower components
+.frontend/node_modules
+.frontend/bower_components
+
+# IDE - Sublime Text
+*.sublime*
+
+# Design files
+psd
+thumb
+sketch
+
+# [Include any other frontend specific rules here]
+
+### Global Ignores ###
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Add other global ignores if necessary
+/frontend/node_modules/
+/.idea/
+/backend/.idea/

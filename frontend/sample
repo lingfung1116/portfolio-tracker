@@ -1,0 +1,46 @@
+<form>
+    <h1
+        class="Typography_typography__R4KcG Typography_headline_size_hero__fLbpw Typography_align_center__tvkg9 Typography_weight_bold___rjzw">
+        Start now</h1>
+    <div class="Subtitle_container__Cd76W"><span
+            class="Typography_typography__R4KcG Typography_default_size_medium__LzhV6 Typography_align_left__gZ0fM Typography_weight_regular__Lzkwa">Already
+            have an account?</span><a
+            class="Typography_typography__R4KcG Typography_default_size_medium__LzhV6 Typography_align_left__gZ0fM"
+            href="/login"><button
+                class="Button_button__9Td4K Button_content_align_center__kqdi_ Button_size_medium__4oLGh Button_type_text__FwxaR Button_color_primary__1KXPD"
+                type="button"><span class="Button_button_contents__h8HhL"><span>Login</span><span
+                        class="Button_icon__e2Sdl"><svg viewBox="0 0 24 24" fill="none"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path d="m9 18 6-6-6-6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                                stroke-linejoin="round"></path>
+                        </svg></span></span></button></a></div>
+    <div class="styles_input__ADwOz FormControl_form_control__IeXMf">
+        <div class="FormControl_label__yyzu1 FormControl_label_placement_top__5ZCBG">
+            <div class="Field_input_wrapper__iZ7To">
+                <div class="Field_content__VNHEH"><input type="text" class="Base_input__g0n_E" id="email"
+                        placeholder="Email" aria-invalid="false" aria-labelledby="form-label-email"
+                        aria-describedby="status-message-email" data-sl="mask" autocorrect="off" value=""></div>
+            </div>
+        </div>
+    </div>
+    <div class="styles_input__ADwOz FormControl_form_control__IeXMf">
+        <div class="FormControl_label__yyzu1 FormControl_label_placement_top__5ZCBG">
+            <div class="Field_input_wrapper__iZ7To">
+                <div class="Field_content__VNHEH"><input type="password" class="Base_input__g0n_E" id="password"
+                        placeholder="Password" aria-invalid="false" aria-labelledby="form-label-password"
+                        aria-describedby="status-message-password" value="" autocorrect="off" data-sl="mask"></div>
+                <div class="Field_suffix__8F4Ez"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
+                        cursor="pointer" role="button">
+                        <path
+                            d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.498 18.498 0 0 1-2.16 3.19m-6.72-1.07a3.001 3.001 0 0 1-5.194-2.098A3 3 0 0 1 9.88 9.88m8.06 8.06A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94l11.88 11.88ZM1 1l22 22"
+                            stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                        </path>
+                    </svg></div>
+            </div>
+        </div>
+    </div>
+    <div class="styles_submit__DV6Qd"><button
+            class="Button_button__9Td4K Button_block__fmBvL Button_content_align_center__kqdi_ Button_size_large__5FRRL Button_type_filled__JRpnE Button_color_primary__1KXPD"
+            type="submit"><span class="Button_button_contents__h8HhL"><span>Sign up</span></span></button></div>
+</form>
+

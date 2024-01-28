@@ -1,0 +1,78 @@
+.TransactionsWidget {
+    background-color: #222;
+    color: white;
+    padding: 20px;
+    border-radius: 8px;
+    font-family: Arial, sans-serif;
+  }
+  
+  .TransactionsWidget__Title {
+    font-size: 1.5em;
+    margin-bottom: 0.5em;
+    text-align: left;
+  }
+  
+  .TransactionsWidget__Month {
+    font-size: 1em;
+    color: #aaa;
+    margin-bottom: 1em;
+    text-align: left;
+  }
+  
+  .TransactionsWidget__List {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .TransactionsWidget__Item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+  }
+  
+  .TransactionsWidget__DateContainer {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+  }
+  
+  .TransactionsWidget__Date {
+    font-weight: bold;
+  }
+  
+  .TransactionsWidget__Arrow {
+    color: #aaa;
+    font-size: 0.9em;
+  }
+  
+  .TransactionsWidget__Details {
+    flex-basis: 80%;
+    padding: 0 10px; /* Adjust as necessary */
+    text-align: left;
+  }
+  
+  .TransactionsWidget__Company {
+    font-weight: bold;
+    display: block;
+  }
+  
+  .TransactionsWidget__Action {
+    color: #aaa;
+    font-size: 0.9em;
+    display: block; /* Action text on a new line */
+  }
+  
+  .TransactionsWidget__Total {
+    text-align: right;
+    margin-right: 20px;
+  }
+  
+  .TransactionsWidget__Divider {
+    border: none;
+    height: 1px;
+    background-color: #333;
+    margin: 10px 0;
+  }
+  

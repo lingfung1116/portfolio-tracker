@@ -1,0 +1,113 @@
+/* AddTransactionModal.css */
+.modal-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+  }
+  
+  .modal-content {
+    background: #333;
+    padding: 20px;
+    border-radius: 5px;
+    width: 90%;
+    max-width: 600px;
+    color :#fff;
+  }
+  
+  .modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    color: #fff;
+  }
+  
+  .modal-title {
+     color: #fff;
+    font-size: 24px;
+    margin: 0;
+  }
+ 
+  
+  .modal-close-button {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+  }
+  
+  .AddTransactionModal__form-group {
+    margin-bottom: 20px;
+    text-align: left;
+  }
+  
+  .AddTransactionModal__form-group label {
+    display: block;
+    margin-bottom: 5px;
+    color: #ccc;
+    font-weight: bold;
+  }
+  
+  .AddTransactionModal__form-group input[type="text"],
+  .AddTransactionModal__form-group input[type="number"],
+  .AddTransactionModal__form-group input[type="date"],
+  .AddTransactionModal__form-group select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    background-color: #333; /* Darker background for inputs */
+    color: #fff; /* Light text color for inputs */
+    border: 1px solid #444; /* Darker border for inputs */
+    
+  }
+  
+  .AddTransactionModal__form-group button {
+    display: inline-block;
+    color: black;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-right: 10px;
+    margin-top: 10px;
+    background-color: #444; /* Choose a color that stands out on dark background */
+    color: #fff;
+  }
+  
+  .AddTransactionModal__form-group button:hover {
+    background-color: grey;
+  }
+
+  .AddTransactionModal__form-group input:focus::placeholder {
+    color: #aaa; /* Darker placeholder text color */
+  }
+
+
+  .AddTransactionModal__form-group input[type="text"],
+.AddTransactionModal__form-group input[type="number"],
+.AddTransactionModal__form-group input[type="date"],
+.AddTransactionModal__form-group select {
+  /* Other styles remain unchanged */
+  box-sizing: border-box; /* Ensures padding doesn't add to the width */
+}
+
+
+
+  
+  .AddTransactionModal__modal-close-button {
+    /* Adjustments to ensure the close button is more aligned with the sample */
+    color: #333;
+    font-size: 24px;
+    margin-left: auto; /* Aligns the button to the right */
+    padding: 0;
+  
+  }
+  

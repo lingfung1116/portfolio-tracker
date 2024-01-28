@@ -1,0 +1,95 @@
+/* SignUpPage.css */
+.sign-up-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  height: 100vh; /* Adjust height as needed */
+  background-color: #222;
+  padding-top: 70px; /* Adjust padding to position form appropriately */
+}
+
+.sign-up-form {
+  width: 400px;
+  padding: 30px;
+  background: #333;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 1);
+}
+
+.title {
+  font-weight: bold;
+  color: white;
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 30px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.password-group {
+  position:relative;
+  display: flex;
+  flex-direction: column; 
+}
+
+
+.show-password-button {
+  position:absolute;
+  right: 5px; /* Adjust as needed */
+  top: 7px; /* Adjust as needed */
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+}
+
+.show-password-button img {
+  width: 20px;
+  height: auto;
+  filter: invert(1);
+}
+
+.sign-up-input {
+  padding: 10px;
+  margin-bottom: 10px;
+  border: none;
+  border-radius: 5px;
+  background-color: #555;
+  color: white;
+}
+
+.sign-up-button {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  background-color: #5c6bc0;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  
+}
+
+.login-link {
+  color: #61dafb;
+  text-decoration: none;
+  display: block;
+  margin-top: 10px;
+  text-align: center;
+}
+
+.input-error {
+  border: 2px solid #f13824;
+}
+
+
+.error-message {
+  color: #f13824;
+  font-size: 14px;
+  padding: 5px;
+  text-align: left;
+}
