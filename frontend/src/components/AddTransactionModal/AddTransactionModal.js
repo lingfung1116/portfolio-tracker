@@ -3,15 +3,20 @@ import './AddTransactionModal.css';
 import React, { useState, useEffect } from 'react';
 
 const AddTransactionModal = ({ showModal, closeModal, onTransactionAdded }) => {
-  const [security, setSecurity] = useState('');
-  const [quantity, setQuantity] = useState('');
-  const [purchasePrice, setPurchasePrice] = useState('');
-  const [totalAmount, setTotalAmount] = useState('0.00');
-
   const getTodaysDate = () => {
     const today = new Date();
     return today.toISOString().split('T')[0];
   };
+
+  const [security, setSecurity] = useState('');
+  const [securityError, setSecurityError] = useState('');
+
+  const [quantity, setQuantity] = useState('');
+  const [quantityError, setQuantityError] = useState('');
+  const [purchasePrice, setPurchasePrice] = useState('');
+  const [purchasePriceError, setPurchasePriceError] = useState('');
+  const [transactionDate, setTransactionDate] = useState(getTodaysDate());
+  const [totalAmount, setTotalAmount] = useState('0.00');
 
   useEffect(() => {
     const total =
@@ -36,9 +41,38 @@ const AddTransactionModal = ({ showModal, closeModal, onTransactionAdded }) => {
     }
   };
 
+  const handleDateChange = (event) => {
+    setTransactionDate(event.target.value);
+  };
+
   // Handle form submission
   const handleSubmit = async (event) => {
     event.preventDefault();
+
+    if (!security) {
+      setSecurityError('Security field cannot be empty');
+      return;
+    } else {
+      setSecurityError('');
+    }
+
+    if (!quantity || quantity <= 0) {
+      setQuantityError(
+        'Quantity field cannot be empty and must be a positive number'
+      );
+      return;
+    } else {
+      setQuantityError('');
+    }
+
+    if (!purchasePrice || purchasePrice < 0) {
+      setPurchasePriceError(
+        'Purchase Price field cannot be empty and must be greater than zero'
+      );
+      return;
+    } else {
+      setPurchasePriceError('');
+    }
 
     const userId = localStorage.getItem('userId');
     const jwtToken = localStorage.getItem('jwt');
@@ -48,8 +82,16 @@ const AddTransactionModal = ({ showModal, closeModal, onTransactionAdded }) => {
       return; // Exit the function if we don't have the necessary information
     }
 
+    // Construct a Date object from the transactionDate state
+    // and then format it as required by the API
+    const transactionDateTime = new Date(transactionDate);
+    // Add the time part as 00:00:00.00 (HH:MM:SS.MS)
+    const formattedTransactionDate = `${
+      transactionDateTime.toISOString().split('T')[0]
+    }T00:00:00.00`;
+
     const transactionData = {
-      transactionDate: new Date().toISOString(), // Format date as required by your API
+      transactionDate: formattedTransactionDate, // Use the formatted date
       type: document.getElementById('transaction-type').value,
       quantity: parseInt(quantity, 10),
       price: parseFloat(purchasePrice),
@@ -114,7 +156,12 @@ const AddTransactionModal = ({ showModal, closeModal, onTransactionAdded }) => {
               value={security}
               onChange={handleSecurityChange}
               onKeyDown={handleSecurityInput}
+              // Add a class to style the input field if there is an error
+              className={securityError ? 'error' : ''}
             />
+            {securityError && (
+              <div className="error-message">{securityError}</div>
+            )}
           </div>
 
           <div className="AddTransactionModal__form-group">
@@ -127,7 +174,12 @@ const AddTransactionModal = ({ showModal, closeModal, onTransactionAdded }) => {
               placeholder="e.g., 10"
               value={quantity}
               onChange={handleQuantityChange}
+              // Add a class to style the input field if there is an error
+              className={quantityError ? 'error' : ''}
             />
+            {quantityError && (
+              <div className="error-message">{quantityError}</div>
+            )}
           </div>
 
           <div className="AddTransactionModal__form-group">
@@ -136,7 +188,8 @@ const AddTransactionModal = ({ showModal, closeModal, onTransactionAdded }) => {
               type="date"
               id="transaction-date"
               name="transactionDate"
-              defaultValue={getTodaysDate()}
+              value={transactionDate}
+              onChange={handleDateChange}
               max={getTodaysDate()}
             />
           </div>
@@ -150,7 +203,11 @@ const AddTransactionModal = ({ showModal, closeModal, onTransactionAdded }) => {
               placeholder="150.00"
               value={purchasePrice}
               onChange={(e) => setPurchasePrice(e.target.value)}
+              className={purchasePriceError ? 'error' : ''}
             />
+            {purchasePriceError && (
+              <div className="error-message">{purchasePriceError}</div>
+            )}
           </div>
 
           <div className="AddTransactionModal__form-group">

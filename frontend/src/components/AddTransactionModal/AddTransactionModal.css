@@ -111,3 +111,13 @@
   
   }
   
+
+  .error {
+    border-color: red; /* highlight input border in red */
+  }
+  
+  .error-message {
+    color: red; /* error message text in red */
+    font-size: 0.8em;
+    margin-top: 0.25em;
+  }

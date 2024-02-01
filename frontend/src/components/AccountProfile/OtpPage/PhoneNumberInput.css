@@ -1,0 +1,61 @@
+/* PhoneNumberInput.css */
+.phoneNumberInput__otp-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    height: 100vh;
+    background-color: #222;
+    padding-top: 70px;
+  }
+  
+  .phoneNumberInput__otp-form {
+    width: 400px;
+    padding: 30px;
+    background: #333;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 1);
+  }
+  
+  .phoneNumberInput__title {
+    font-weight: bold;
+    color: white;
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 30px;
+  }
+
+  .phoneNumberInput__instruction {
+    color: #f6f6f6;
+    text-align: center;
+    padding: 0 12px;
+    margin-bottom: 20px;
+    font-size: smaller;
+  }
+  
+  .phoneNumberInput__form-group {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  
+  .phoneNumberInput__otp-input {
+    padding: 10px;
+    margin-bottom: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #555;
+    color: white;
+  }
+  
+  .phoneNumberInput__otp-button {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #5c6bc0;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  

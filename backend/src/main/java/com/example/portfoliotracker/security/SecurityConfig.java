@@ -34,6 +34,7 @@ public class SecurityConfig {
                 .exceptionHandling(exception -> exception.authenticationEntryPoint(authEntryPoint))  // Custom entry point for unauthenticated requests
                 .authorizeRequests(authorize -> authorize
                         .requestMatchers("/api/users/**").permitAll()  // Permit all requests to user endpoints
+                        .requestMatchers("/otp/**").permitAll()  // Permit all requests to user endpoints
                         .anyRequest().authenticated())  // All other requests need to be authenticated
                 .addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);  // Adding your custom JWT filter
 

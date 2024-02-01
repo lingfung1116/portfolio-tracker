@@ -27,7 +27,8 @@ function LoginPage() {
   const handleSubmit = (e) => {
     e.preventDefault();
     setLoading(true);
-    fetch('http://localhost:8080/api/users/login', {
+
+    fetch(process.env.REACT_APP_LOGIN_URL, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -41,7 +42,7 @@ function LoginPage() {
             // Use the token from the response body instead of headers
             localStorage.setItem('jwt', data.token);
             localStorage.setItem('userId', data.id);
-            navigate('/positions');
+            navigate('/dashboard');
           });
         } else {
           return response.json().then((data) => {

@@ -1,27 +1,25 @@
 import React, { useState, useEffect } from 'react';
 import './PositionsWidget.css';
-import AddTransactionModal from '../../../components/AddTransactionModal/AddTransactionModal';
-import defaultLogo from '../../../assets/defaultLogo.png';
+import AddTransactionModal from '../../AddTransactionModal/AddTransactionModal';
+import fetchCompanyLogos from '../../../utils/fetchCompanyLogos'; // Import the utility function
+import Header from '../../Header/Header';
 
-const PositionsWidget = () => {
+const PositionsWidget = ({ userId, jwt, onTransactionAdded }) => {
   const [positions, setPositions] = useState([]); // State to store positions
   const [logos, setLogos] = useState({});
   const [showModal, setShowModal] = useState(false); // State to manage modal visibility
 
   // Function to fetch positions data
   const fetchPositions = () => {
-    const userId = localStorage.getItem('userId');
-    const jwtToken = localStorage.getItem('jwt');
-
-    if (!userId || !jwtToken) {
+    if (!userId || !jwt) {
       console.error('No user ID or JWT token found in local storage.');
       return;
     }
 
-    fetch(`http://localhost:8080/api/positions/user/${userId}`, {
+    fetch(`${process.env.REACT_APP_POSITION_WIDGET_URL}${userId}`, {
       method: 'GET',
       headers: {
-        Authorization: `Bearer ${jwtToken}`,
+        Authorization: `Bearer ${jwt}`,
         'Content-Type': 'application/json',
       },
     })
@@ -41,32 +39,43 @@ const PositionsWidget = () => {
 
   // Function to fetch logos using the API
   const fetchLogos = async (symbols) => {
-    const requests = symbols.map((symbol) =>
-      fetch(
-        `https://api.benzinga.com/api/v2/logos/search?token=b2d218693a4b4510a1f9fc49be531956&search_keys=${symbol}&search_keys_type=symbol&fields=mark_vector_light`,
-        {
-          method: 'GET',
-          headers: { accept: 'application/json' },
-        }
-      )
-    );
-
     try {
-      const responses = await Promise.all(requests);
-      const logosData = await Promise.all(responses.map((res) => res.json()));
-
-      const newLogos = logosData.reduce((acc, data) => {
-        if (data.ok && data.data.length > 0) {
-          const symbolData = data.data[0]; // Assuming the first item is the desired one
-          const logoUrl = symbolData.files.mark_vector_light;
-          acc[symbolData.search_key] = logoUrl;
-        }
-        return acc;
-      }, {});
+      const newLogos = await fetchCompanyLogos(symbols); // Use the utility function
       setLogos(newLogos);
     } catch (error) {
       console.error('Error fetching logos:', error);
     }
+  };
+
+  // Calculating total position and unrealized P/L
+  const calculateTotals = (positions) => {
+    return positions.reduce(
+      (totals, position) => {
+        const currentPositionValue = position.currentPrice * position.quantity;
+        const individualPL =
+          currentPositionValue - position.buyInPrice * position.quantity;
+
+        totals.totalPosition += currentPositionValue;
+        totals.totalPL += individualPL;
+
+        return totals;
+      },
+      { totalPosition: 0, totalPL: 0 }
+    );
+  };
+
+  // Use the calculateTotals function to get the total values
+  const { totalPosition, totalPL } = calculateTotals(positions);
+
+  // Use a single function to format currency with color based on P/L value
+  const formatCurrencyWithPLColor = (value) => {
+    const plClass =
+      value >= 0 ? 'PositionWidget__positive' : 'PositionWidget__negative';
+    return (
+      <span className={plClass}>
+        {value >= 0 ? `+${formatCurrency(value)}` : formatCurrency(value)}
+      </span>
+    );
   };
 
   useEffect(() => {
@@ -92,7 +101,8 @@ const PositionsWidget = () => {
   const openModal = () => setShowModal(true);
   const closeModal = () => {
     setShowModal(false);
-    fetchPositions(); // Fetch positions again after closing the modal
+    fetchPositions();
+    onTransactionAdded(); // Notify parent component that a transaction was added
   };
 
   return (
@@ -100,6 +110,18 @@ const PositionsWidget = () => {
       <div className="PositionWidget__widget">
         <div className="PositionWidget__widget-header">
           <h1 className="PositionWidget__positions-title">Positions</h1>
+          <div className="PositionWidget__header-totals">
+            <div className="PositionWidget__net-liq">
+              <span className="PositionWidget__label">Net Liq Value: </span>
+              <span className="PositionWidget__value">
+                {formatCurrency(totalPosition)}
+              </span>
+            </div>
+            <div className="PositionWidget__unrealized-pl">
+              <span className="PositionWidget__label">Unrealized P/L: </span>
+              {formatCurrencyWithPLColor(totalPL)}
+            </div>
+          </div>
           <button
             className="PositionWidget__add-transaction-btn"
             onClick={openModal}
@@ -112,7 +134,7 @@ const PositionsWidget = () => {
             <tr className="PositionWidget__tr">
               <th className="PositionWidget__th">Title</th>
               <th className="PositionWidget__th">Buy in</th>
-              <th className="PositionWidget__th">Position</th>
+              <th className="PositionWidget__th">Current Position</th>
               <th className="PositionWidget__th">P/L</th>
             </tr>
           </thead>
@@ -130,7 +152,7 @@ const PositionsWidget = () => {
                 <tr key={position.id} className="PositionWidget__tr">
                   <td className="PositionWidget__td">
                     <img
-                      src={logos[position.symbol] || defaultLogo}
+                      src={logos[position.symbol]}
                       alt={`${position.symbol} logo`}
                       className="PositionWidget__logo"
                     />
@@ -163,7 +185,7 @@ const PositionsWidget = () => {
           </tbody>
         </table>
         <div className="PositionWidget__footer">
-          Real-Time data powered by marketstack
+          Latest End-Of-Day data powered by marketstack
         </div>
       </div>
       <AddTransactionModal

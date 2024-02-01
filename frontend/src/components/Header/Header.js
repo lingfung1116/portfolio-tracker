@@ -11,10 +11,10 @@ function Header({ showLogout }) {
   const handleLogout = () => {
     localStorage.removeItem('jwt');
     localStorage.removeItem('userId');
-    navigate('/login');
+    navigate('/');
   };
 
-  const shouldShowLogout = showLogout || location.pathname === '/positions';
+  const shouldShowLogout = showLogout || location.pathname === '/dashboard';
 
   return (
     <header className="header">

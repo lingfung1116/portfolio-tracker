@@ -13,6 +13,7 @@ import java.math.RoundingMode;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class PositionService {
@@ -28,7 +29,10 @@ public class PositionService {
     private ExternalStockPriceService externalStockPriceService;
 
     public List<Position> findPositionsByUserId(Long userId) {
-        return positionRepository.findByUserId(userId);
+        // Use a stream to filter only the positions that are open
+        return positionRepository.findByUserId(userId).stream()
+                .filter(Position::isOpen) // This uses the isOpen method of Position to filter
+                .collect(Collectors.toList());
     }
 
     public Position savePosition(Position position) {
@@ -51,11 +55,12 @@ public class PositionService {
                 transaction.getUser()
         ));
 
-        // Adjust the quantity and buy-in based on the transaction type
         if ("BUY".equalsIgnoreCase(transaction.getType())) {
             updateAverageBuyInPrice(position, transaction.getPrice(), transaction.getQuantity());
+            position.setOpen(true); // Ensure the position is marked as open when buying
         } else if ("SELL".equalsIgnoreCase(transaction.getType())) {
             sellSharesAndUpdatePosition(position, transaction.getQuantity());
+            // If after selling the quantity is zero, then position will be closed in sellSharesAndUpdatePosition method.
         }
 
         return positionRepository.save(position);
@@ -82,6 +87,7 @@ public class PositionService {
 
         position.setQuantity(totalQuantity.intValue());
         position.setBuyIn(totalCost.divide(totalQuantity, RoundingMode.HALF_EVEN));
+        position.setOpen(true); // Mark the position as open when the average buy-in price is updated
     }
 
     @Transactional
@@ -108,6 +114,12 @@ public class PositionService {
         BigDecimal currentPrice = getCurrentMarketPrice(position.getSymbol());
         BigDecimal currentTotalValue = currentPrice.multiply(BigDecimal.valueOf(position.getQuantity()));
         BigDecimal initialTotalValue = position.getBuyIn().multiply(BigDecimal.valueOf(position.getQuantity()));
+
+        // Check if initialTotalValue is zero to prevent division by zero
+        if (initialTotalValue.compareTo(BigDecimal.ZERO) == 0) {
+            return BigDecimal.ZERO; // If no initial value, profit/loss is zero
+        }
+
         BigDecimal profitLoss = currentTotalValue.subtract(initialTotalValue);
         return profitLoss.divide(initialTotalValue, RoundingMode.HALF_UP);
     }

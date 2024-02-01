@@ -26,11 +26,9 @@ function SignUpPage() {
     setError(''); // Reset the error message on input change
   };
 
-  // Validates the password according to specific criteria
   const validatePassword = (password) => {
-    const regex =
-      /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/;
-    return regex.test(password) && password.length >= 8;
+    const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*#?&]).{8,}$/;
+    return regex.test(password);
   };
 
   // Handles the form submission for signing up
@@ -38,7 +36,7 @@ function SignUpPage() {
     e.preventDefault();
     if (!validatePassword(userData.password)) {
       setError(
-        'The password should consist of at least 8 characters and include at least one number, one letter, and one symbol.'
+        'The password should consist of at least 8 characters and include at least one number, one uppercase letter, one lowercase letter and one symbol.'
       );
       return;
     }
@@ -46,7 +44,7 @@ function SignUpPage() {
       setError('Passwords do not match.');
       return;
     }
-    fetch('http://localhost:8080/api/users/signup', {
+    fetch(process.env.REACT_APP_SIGNUP_URL, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -61,7 +59,10 @@ function SignUpPage() {
           return response.json().then((data) => {
             // Handle the token in the response body here as well
             localStorage.setItem('jwt', data.token);
-            navigate('/positions');
+            localStorage.setItem('userId', data.id);
+            localStorage.setItem('username', userData.username); // Store username
+
+            navigate('/otp-phone'); // Navigate to phone number input page of otp
           });
         } else {
           return response.json().then((data) => {
@@ -84,7 +85,17 @@ function SignUpPage() {
   return (
     <div className="sign-up-container">
       <form className="sign-up-form" onSubmit={handleSubmit}>
-        <div className="title">Sign Up</div>
+        <div className="title">Create Account</div>
+        <div className="password-requirements">
+          Password Requirements:
+          <ul>
+            <li>A minimum of 8 characters</li>
+            <li>A lowercase character</li>
+            <li>An uppercase character</li>
+            <li>A special character</li>
+            <li>A numeric character</li>
+          </ul>
+        </div>
         <div className="form-group">
           <input
             type="text"
@@ -139,7 +150,7 @@ function SignUpPage() {
           <button type="submit" className="sign-up-button">
             Sign Up
           </button>
-          <Link to="/login" className="login-link">
+          <Link to="/" className="login-link">
             Already have an account? Login
           </Link>
         </div>

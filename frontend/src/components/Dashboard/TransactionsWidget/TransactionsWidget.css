@@ -1,13 +1,19 @@
+.TransactionsWidget__container {
+  padding: 20px;
+}
+
 .TransactionsWidget {
     background-color: #222;
     color: white;
     padding: 20px;
     border-radius: 8px;
+    margin: auto;
     font-family: Arial, sans-serif;
+    max-width: 1000px;
   }
   
   .TransactionsWidget__Title {
-    font-size: 1.5em;
+    font-size: 20px; /* Font size of the title */
     margin-bottom: 0.5em;
     text-align: left;
   }
@@ -40,19 +46,27 @@
   
   .TransactionsWidget__Date {
     font-weight: bold;
+    min-width: 100px;
   }
   
   .TransactionsWidget__Arrow {
     color: #aaa;
-    font-size: 0.9em;
+    font-size: large;
   }
   
-  .TransactionsWidget__Details {
+  .TransactionsWidget__DetailsWithLogo {
+    display: flex;
+    align-items: center; /* Aligns items vertically in the center */
     flex-basis: 80%;
-    padding: 0 10px; /* Adjust as necessary */
-    text-align: left;
   }
-  
+
+  .TransactionsWidget__Details {
+    display: flex;
+    text-align: left;
+    flex-direction: column;
+    padding-left: 10px; /* Adds space between the logo and the text */
+  }
+
   .TransactionsWidget__Company {
     font-weight: bold;
     display: block;
@@ -67,6 +81,8 @@
   .TransactionsWidget__Total {
     text-align: right;
     margin-right: 20px;
+    min-width: 100px; /* Adjust this value to fit the widest possible total value */
+    flex-shrink: 0; /* Prevents the total from shrinking smaller than its content */
   }
   
   .TransactionsWidget__Divider {
@@ -74,5 +90,12 @@
     height: 1px;
     background-color: #333;
     margin: 10px 0;
+  }
+  
+  .TransactionsWidget__logo {
+    width: auto; 
+    height: 25px; 
+    margin-right: 8px;
+    align-self: center; /* Aligns the logo itself vertically */
   }
   

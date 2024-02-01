@@ -1,0 +1,85 @@
+/* OtpInput.css */
+
+.otpInput__otp-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    height: 100vh;
+    background-color: #222;
+    padding-top: 70px;
+  }
+  
+  .otpInput__otp-form {
+    width: 400px;
+    padding: 30px;
+    background: #333;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  }
+  
+  .otpInput__title {
+    font-weight: bold;
+    color: white;
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 30px;
+  }
+
+  .otpInput__instruction {
+    color: #f6f6f6;
+    text-align: center;
+    padding: 0 12px;
+    margin-bottom: 20px;
+    font-size: smaller;
+  }
+  
+  .otpInput__form-group {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .otpInput__otp-input {
+    padding: 10px;
+    margin-bottom: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #555;
+    color: white;
+  }
+  
+  .otpInput__otp-button {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #5c6bc0;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  
+  .otpInput__error-message {
+    color: #f13824;
+    font-size: 14px;
+    padding: 5px;
+    text-align: center;
+  }
+  
+  .otpInput__edit-number {
+    text-align: center;
+    margin-top: 15px; /* Add some space above the edit button/link */
+  }
+  
+  .otpInput__edit-button {
+    background: none;
+    border: none;
+    color: #61dafb; /* Use a color that matches your design */
+    text-decoration: underline;
+    cursor: pointer;
+  }
+  
+  /* Add styles for hover state if desired */
+  .otpInput__edit-button:hover {
+    color: #4a5aa0; /* Darker shade for hover effect */
+  }
