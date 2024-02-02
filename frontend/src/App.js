@@ -1,4 +1,3 @@
-// App.js
 import React from 'react';
 import './App.css';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
@@ -12,10 +11,24 @@ import PositionsWidget from './components/Dashboard/PositionsWidget/PositionsWid
 import TransactionsWidget from './components/Dashboard/TransactionsWidget/TransactionsWidget';
 
 function App() {
+  // Function to check if the current route should display the Header
+  const shouldDisplayHeader = () => {
+    const allowedPaths = [
+      '/',
+      '/signup',
+      '/otp-phone',
+      '/otp-code',
+      '/dashboard',
+      '/positions',
+      '/transactions',
+    ];
+    return allowedPaths.includes(window.location.pathname);
+  };
+
   return (
     <Router>
       <div className="App">
-        <Header /> {/* No prop is passed by default */}
+        {shouldDisplayHeader() && <Header />}
         <Routes>
           <Route path="/" element={<LoginPage />} />
           <Route path="/signup" element={<SignUpPage />} />

@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import './PositionsWidget.css';
 import AddTransactionModal from '../../AddTransactionModal/AddTransactionModal';
 import fetchCompanyLogos from '../../../utils/fetchCompanyLogos'; // Import the utility function
-import Header from '../../Header/Header';
 
 const PositionsWidget = ({ userId, jwt, onTransactionAdded }) => {
   const [positions, setPositions] = useState([]); // State to store positions

@@ -15,7 +15,7 @@ public class ApiConfig {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**") // Adjust this to your needs
-                        .allowedOrigins("http://localhost:3000") // or use "*" for all origins
+                        .allowedOrigins("*") // or use "*" for all origins
                         .allowedMethods("GET", "POST", "PUT", "DELETE")
                         .allowedHeaders("*");
             }
